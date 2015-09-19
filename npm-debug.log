@@ -1,0 +1,273 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'install' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.40
+4 verbose node symlink /usr/bin/node
+5 warn package.json node-web-scrape@0.0.1 No repository field.
+6 verbose readDependencies using package.json deps
+7 verbose install where, deps [ '/home/clare/code/giphyindex',
+7 verbose install   [ 'express', 'request', 'cheerio' ] ]
+8 info preinstall node-web-scrape@0.0.1
+9 verbose readDependencies using package.json deps
+10 verbose cache add [ 'cheerio@latest', null ]
+11 verbose cache add name=undefined spec="cheerio@latest" args=["cheerio@latest",null]
+12 verbose parsed url { protocol: null,
+12 verbose parsed url   slashes: null,
+12 verbose parsed url   auth: null,
+12 verbose parsed url   host: null,
+12 verbose parsed url   port: null,
+12 verbose parsed url   hostname: null,
+12 verbose parsed url   hash: null,
+12 verbose parsed url   search: null,
+12 verbose parsed url   query: null,
+12 verbose parsed url   pathname: 'cheerio@latest',
+12 verbose parsed url   path: 'cheerio@latest',
+12 verbose parsed url   href: 'cheerio@latest' }
+13 verbose cache add name="cheerio" spec="latest" args=["cheerio","latest"]
+14 verbose parsed url { protocol: null,
+14 verbose parsed url   slashes: null,
+14 verbose parsed url   auth: null,
+14 verbose parsed url   host: null,
+14 verbose parsed url   port: null,
+14 verbose parsed url   hostname: null,
+14 verbose parsed url   hash: null,
+14 verbose parsed url   search: null,
+14 verbose parsed url   query: null,
+14 verbose parsed url   pathname: 'latest',
+14 verbose parsed url   path: 'latest',
+14 verbose parsed url   href: 'latest' }
+15 verbose addNamed [ 'cheerio', 'latest' ]
+16 verbose addNamed [ null, null ]
+17 verbose cache add [ 'express@latest', null ]
+18 verbose cache add name=undefined spec="express@latest" args=["express@latest",null]
+19 verbose parsed url { protocol: null,
+19 verbose parsed url   slashes: null,
+19 verbose parsed url   auth: null,
+19 verbose parsed url   host: null,
+19 verbose parsed url   port: null,
+19 verbose parsed url   hostname: null,
+19 verbose parsed url   hash: null,
+19 verbose parsed url   search: null,
+19 verbose parsed url   query: null,
+19 verbose parsed url   pathname: 'express@latest',
+19 verbose parsed url   path: 'express@latest',
+19 verbose parsed url   href: 'express@latest' }
+20 silly lockFile b5ca765b-cheerio-latest cheerio@latest
+21 verbose lock cheerio@latest /home/clare/.npm/b5ca765b-cheerio-latest.lock
+22 verbose cache add [ 'request@latest', null ]
+23 verbose cache add name=undefined spec="request@latest" args=["request@latest",null]
+24 verbose parsed url { protocol: null,
+24 verbose parsed url   slashes: null,
+24 verbose parsed url   auth: null,
+24 verbose parsed url   host: null,
+24 verbose parsed url   port: null,
+24 verbose parsed url   hostname: null,
+24 verbose parsed url   hash: null,
+24 verbose parsed url   search: null,
+24 verbose parsed url   query: null,
+24 verbose parsed url   pathname: 'request@latest',
+24 verbose parsed url   path: 'request@latest',
+24 verbose parsed url   href: 'request@latest' }
+25 verbose cache add name="express" spec="latest" args=["express","latest"]
+26 verbose parsed url { protocol: null,
+26 verbose parsed url   slashes: null,
+26 verbose parsed url   auth: null,
+26 verbose parsed url   host: null,
+26 verbose parsed url   port: null,
+26 verbose parsed url   hostname: null,
+26 verbose parsed url   hash: null,
+26 verbose parsed url   search: null,
+26 verbose parsed url   query: null,
+26 verbose parsed url   pathname: 'latest',
+26 verbose parsed url   path: 'latest',
+26 verbose parsed url   href: 'latest' }
+27 verbose addNamed [ 'express', 'latest' ]
+28 verbose addNamed [ null, null ]
+29 silly lockFile c30a01ab-express-latest express@latest
+30 verbose lock express@latest /home/clare/.npm/c30a01ab-express-latest.lock
+31 verbose cache add name="request" spec="latest" args=["request","latest"]
+32 verbose parsed url { protocol: null,
+32 verbose parsed url   slashes: null,
+32 verbose parsed url   auth: null,
+32 verbose parsed url   host: null,
+32 verbose parsed url   port: null,
+32 verbose parsed url   hostname: null,
+32 verbose parsed url   hash: null,
+32 verbose parsed url   search: null,
+32 verbose parsed url   query: null,
+32 verbose parsed url   pathname: 'latest',
+32 verbose parsed url   path: 'latest',
+32 verbose parsed url   href: 'latest' }
+33 verbose addNamed [ 'request', 'latest' ]
+34 verbose addNamed [ null, null ]
+35 silly lockFile 5da6dfb1-request-latest request@latest
+36 verbose lock request@latest /home/clare/.npm/5da6dfb1-request-latest.lock
+37 info addNameTag [ 'cheerio', 'latest' ]
+38 info addNameTag [ 'express', 'latest' ]
+39 info addNameTag [ 'request', 'latest' ]
+40 verbose request where is /cheerio
+41 verbose request registry https://registry.npmjs.org/
+42 verbose request id 77f73be959e249d5
+43 verbose url raw /cheerio
+44 verbose url resolving [ 'https://registry.npmjs.org/', './cheerio' ]
+45 verbose url resolved https://registry.npmjs.org/cheerio
+46 verbose request where is https://registry.npmjs.org/cheerio
+47 info trying registry request attempt 1 at 16:12:40
+48 verbose etag "8F9UZAVFWC7JD6MRPPYH6UXFJ"
+49 http GET https://registry.npmjs.org/cheerio
+50 verbose request where is /express
+51 verbose request registry https://registry.npmjs.org/
+52 verbose url raw /express
+53 verbose url resolving [ 'https://registry.npmjs.org/', './express' ]
+54 verbose url resolved https://registry.npmjs.org/express
+55 verbose request where is https://registry.npmjs.org/express
+56 info trying registry request attempt 1 at 16:12:40
+57 verbose etag "DA5A33M7IUQUZ3NCGKOEW6S5M"
+58 http GET https://registry.npmjs.org/express
+59 verbose request where is /request
+60 verbose request registry https://registry.npmjs.org/
+61 verbose url raw /request
+62 verbose url resolving [ 'https://registry.npmjs.org/', './request' ]
+63 verbose url resolved https://registry.npmjs.org/request
+64 verbose request where is https://registry.npmjs.org/request
+65 info trying registry request attempt 1 at 16:12:40
+66 verbose etag "OLI4WWINDLDHQIJ0WA3DUE8V"
+67 http GET https://registry.npmjs.org/request
+68 http 304 https://registry.npmjs.org/request
+69 silly registry.get cb [ 304,
+69 silly registry.get   { date: 'Sat, 19 Sep 2015 20:12:41 GMT',
+69 silly registry.get     via: '1.1 varnish',
+69 silly registry.get     'cache-control': 'max-age=60',
+69 silly registry.get     etag: '"OLI4WWINDLDHQIJ0WA3DUE8V"',
+69 silly registry.get     age: '39',
+69 silly registry.get     connection: 'keep-alive',
+69 silly registry.get     'x-served-by': 'cache-ord1722-ORD',
+69 silly registry.get     'x-cache': 'HIT',
+69 silly registry.get     'x-cache-hits': '1',
+69 silly registry.get     'x-timer': 'S1442693561.043649,VS0,VE1',
+69 silly registry.get     vary: 'Accept' } ]
+70 verbose etag https://registry.npmjs.org/request from cache
+71 verbose addNamed [ 'request', '2.62.0' ]
+72 verbose addNamed [ '2.62.0', '2.62.0' ]
+73 silly lockFile a166b7d7-request-2-62-0 request@2.62.0
+74 verbose lock request@2.62.0 /home/clare/.npm/a166b7d7-request-2-62-0.lock
+75 silly lockFile a166b7d7-request-2-62-0 request@2.62.0
+76 silly lockFile a166b7d7-request-2-62-0 request@2.62.0
+77 silly lockFile 5da6dfb1-request-latest request@latest
+78 silly lockFile 5da6dfb1-request-latest request@latest
+79 info already installed request@2.62.0
+80 http 304 https://registry.npmjs.org/cheerio
+81 silly registry.get cb [ 304,
+81 silly registry.get   { date: 'Sat, 19 Sep 2015 20:12:41 GMT',
+81 silly registry.get     via: '1.1 varnish',
+81 silly registry.get     'cache-control': 'max-age=60',
+81 silly registry.get     etag: '"8F9UZAVFWC7JD6MRPPYH6UXFJ"',
+81 silly registry.get     age: '0',
+81 silly registry.get     connection: 'keep-alive',
+81 silly registry.get     'x-served-by': 'cache-ord1733-ORD',
+81 silly registry.get     'x-cache': 'HIT',
+81 silly registry.get     'x-cache-hits': '1',
+81 silly registry.get     'x-timer': 'S1442693561.038046,VS0,VE146',
+81 silly registry.get     vary: 'Accept' } ]
+82 verbose etag https://registry.npmjs.org/cheerio from cache
+83 verbose addNamed [ 'cheerio', '0.19.0' ]
+84 verbose addNamed [ '0.19.0', '0.19.0' ]
+85 silly lockFile 31c8477d-cheerio-0-19-0 cheerio@0.19.0
+86 verbose lock cheerio@0.19.0 /home/clare/.npm/31c8477d-cheerio-0-19-0.lock
+87 silly lockFile 31c8477d-cheerio-0-19-0 cheerio@0.19.0
+88 silly lockFile 31c8477d-cheerio-0-19-0 cheerio@0.19.0
+89 silly lockFile b5ca765b-cheerio-latest cheerio@latest
+90 silly lockFile b5ca765b-cheerio-latest cheerio@latest
+91 info already installed cheerio@0.19.0
+92 http 200 https://registry.npmjs.org/express
+93 silly registry.get cb [ 200,
+93 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+93 silly registry.get     etag: '"1WGDWHQV40DLTECYCVYMVH07V"',
+93 silly registry.get     'content-type': 'application/json',
+93 silly registry.get     'cache-control': 'max-age=60',
+93 silly registry.get     'content-length': '527010',
+93 silly registry.get     'accept-ranges': 'bytes',
+93 silly registry.get     date: 'Sat, 19 Sep 2015 20:12:41 GMT',
+93 silly registry.get     via: '1.1 varnish',
+93 silly registry.get     age: '58',
+93 silly registry.get     connection: 'keep-alive',
+93 silly registry.get     'x-served-by': 'cache-ord1720-ORD',
+93 silly registry.get     'x-cache': 'HIT',
+93 silly registry.get     'x-cache-hits': '2',
+93 silly registry.get     'x-timer': 'S1442693561.038383,VS0,VE0',
+93 silly registry.get     vary: 'Accept' } ]
+94 verbose addNamed [ 'express', '4.13.3' ]
+95 verbose addNamed [ '4.13.3', '4.13.3' ]
+96 silly lockFile 51f1744e-express-4-13-3 express@4.13.3
+97 verbose lock express@4.13.3 /home/clare/.npm/51f1744e-express-4-13-3.lock
+98 silly lockFile 51f1744e-express-4-13-3 express@4.13.3
+99 silly lockFile 51f1744e-express-4-13-3 express@4.13.3
+100 silly lockFile c30a01ab-express-latest express@latest
+101 silly lockFile c30a01ab-express-latest express@latest
+102 info already installed express@4.13.3
+103 silly resolved []
+104 info build /home/clare/code/giphyindex
+105 verbose linkStuff [ false, false, false, '/home/clare/code' ]
+106 info linkStuff node-web-scrape@0.0.1
+107 verbose linkBins node-web-scrape@0.0.1
+108 verbose linkMans node-web-scrape@0.0.1
+109 verbose rebuildBundles node-web-scrape@0.0.1
+110 verbose rebuildBundles [ '.bin', 'cheerio', 'express', 'firebase', 'noodlejs', 'request' ]
+111 verbose rebuild bundle /home/clare/code/giphyindex/node_modules/firebase
+112 info build /home/clare/code/giphyindex/node_modules/firebase
+113 info preinstall firebase@2.2.9
+114 verbose linkStuff [ false,
+114 verbose linkStuff   false,
+114 verbose linkStuff   false,
+114 verbose linkStuff   '/home/clare/code/giphyindex/node_modules' ]
+115 info linkStuff firebase@2.2.9
+116 verbose linkBins firebase@2.2.9
+117 verbose linkMans firebase@2.2.9
+118 verbose rebuildBundles firebase@2.2.9
+119 verbose rebuildBundles [ 'faye-websocket' ]
+120 info install firebase@2.2.9
+121 info postinstall firebase@2.2.9
+122 verbose rebuild bundle /home/clare/code/giphyindex/node_modules/noodlejs
+123 info build /home/clare/code/giphyindex/node_modules/noodlejs
+124 info preinstall noodlejs@0.3.2
+125 verbose linkStuff [ false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   false,
+125 verbose linkStuff   '/home/clare/code/giphyindex/node_modules' ]
+126 info linkStuff noodlejs@0.3.2
+127 verbose linkBins noodlejs@0.3.2
+128 verbose link bins [ { noodle: './bin/noodle-server' },
+128 verbose link bins   '/home/clare/code/giphyindex/node_modules/.bin',
+128 verbose link bins   false ]
+129 verbose linkMans noodlejs@0.3.2
+130 verbose rebuildBundles noodlejs@0.3.2
+131 verbose rebuildBundles [ '.bin',
+131 verbose rebuildBundles   'JSONSelect',
+131 verbose rebuildBundles   'chai',
+131 verbose rebuildBundles   'cheerio',
+131 verbose rebuildBundles   'colors',
+131 verbose rebuildBundles   'connect',
+131 verbose rebuildBundles   'connect-ratelimit',
+131 verbose rebuildBundles   'feedparser',
+131 verbose rebuildBundles   'mocha',
+131 verbose rebuildBundles   'moment',
+131 verbose rebuildBundles   'q',
+131 verbose rebuildBundles   'request',
+131 verbose rebuildBundles   'underscore',
+131 verbose rebuildBundles   'xml2json' ]
+132 error Error: EACCES, unlink '/home/clare/code/giphyindex/node_modules/.bin/noodle'
+132 error  { [Error: EACCES, unlink '/home/clare/code/giphyindex/node_modules/.bin/noodle']
+132 error   errno: 3,
+132 error   code: 'EACCES',
+132 error   path: '/home/clare/code/giphyindex/node_modules/.bin/noodle' }
+133 error Please try running this command again as root/Administrator.
+134 error System Linux 3.16.0-45-generic
+135 error command "/usr/bin/node" "/usr/bin/npm" "install"
+136 error cwd /home/clare/code/giphyindex
+137 error node -v v0.10.40
+138 error npm -v 1.4.28
+139 error path /home/clare/code/giphyindex/node_modules/.bin/noodle
+140 error code EACCES
+141 error errno 3
+142 error stack Error: EACCES, unlink '/home/clare/code/giphyindex/node_modules/.bin/noodle'
+143 verbose exit [ 3, true ]

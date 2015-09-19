@@ -1,0 +1,10 @@
+{
+	"articles":{
+		article1: {
+		gif_url: "imgur.com/3QAOoll",
+		article_url: "https://www.nytimes.com",
+		article_sentiment: "0.6",
+	}
+	}
+	
+}

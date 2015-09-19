@@ -35,3 +35,7 @@ function bestGif(newsArticle){
 	}
 	return gifUrl[bestIndex];
 }
+
+e6f2f873a6724327e421ff682d6874d1e0f73e10
+
+indico: 68cd5c1dafb61295a5f288b517bd083b
