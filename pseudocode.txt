@@ -1,0 +1,37 @@
+Core functions:
+
+1. Get news articles -- reddit /r/news TODO: save news articles to array/database
+
+2. Extract sentiment, topics -- indicoio api
+
+3. Associate appropriate GIF -- reddit /r/catgifs TODO: save cat gifs to array/database
+
+
+
+Pseudocode: choosing the best gif
+
+Arrays:
+
+NewsTitles []
+NewsLinks	[]
+NewsTopics	[] []
+NewsSentiments []
+
+GifLinks []
+GifTopics [] []
+GifSentiments []
+
+
+
+function bestGif(newsArticle){
+	int bestIndex = 0;
+	int mostSimilar = Integer.MAX;
+	for(gif in gifs){
+		similarity = compare(gif, newsArticle);
+		if (similarity < mostSimilar){
+			bestIndex = thisIndex;
+			mostSimilar = similarity;
+		}
+	}
+	return gifUrl[bestIndex];
+}
