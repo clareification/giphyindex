@@ -1,0 +1,96 @@
+/* line 10, /Users/Jake/WebDev/giphyindex/style.scss */
+h1, h2, h3, h4, h5 {
+  font-family: "Oswald";
+  font-weight: 700; }
+
+/* line 15, /Users/Jake/WebDev/giphyindex/style.scss */
+p, a {
+  font-family: "Inconsolata";
+  font-weight: 400; }
+
+/* line 20, /Users/Jake/WebDev/giphyindex/style.scss */
+.highlight {
+  color: #FF6464; }
+
+/* line 24, /Users/Jake/WebDev/giphyindex/style.scss */
+body {
+  background-color: #e8e8e8; }
+
+/* line 28, /Users/Jake/WebDev/giphyindex/style.scss */
+.menu {
+  background-color: black;
+  color: white;
+  height: 80px;
+  display: block;
+  position: absolute;
+  bottom: 30px;
+  z-index: 50;
+  text-align: right; }
+
+/* line 39, /Users/Jake/WebDev/giphyindex/style.scss */
+.col {
+  overflow-y: scroll;
+  padding: 12px 5px;
+  max-height: 100vh; }
+  /* line 43, /Users/Jake/WebDev/giphyindex/style.scss */
+  .col::-webkit-scrollbar {
+    width: 0 !important; }
+
+/* line 48, /Users/Jake/WebDev/giphyindex/style.scss */
+.card {
+  width: 400px;
+  height: 250px;
+  overflow: hidden;
+  margin: 5px 10px;
+  display: inline-block;
+  background-color: darkgrey;
+  color: white;
+  padding: 0; }
+  /* line 58, /Users/Jake/WebDev/giphyindex/style.scss */
+  .card .card-img {
+    background-color: #FF6464;
+    z-index: 3; }
+    /* line 61, /Users/Jake/WebDev/giphyindex/style.scss */
+    .card .card-img .card-img-img {
+      margin-top: -45px;
+      width: 400px;
+      min-height: 250px;
+      transition: 0.5s;
+      opacity: 0.7;
+      z-index: 1; }
+    /* line 70, /Users/Jake/WebDev/giphyindex/style.scss */
+    .card .card-img .card-img-title {
+      margin-top: -20px;
+      position: relative;
+      z-index: 5;
+      top: 30px; }
+      /* line 75, /Users/Jake/WebDev/giphyindex/style.scss */
+      .card .card-img .card-img-title .title {
+        background-color: black;
+        color: white;
+        padding: 4px 5px;
+        width: auto; }
+  /* line 84, /Users/Jake/WebDev/giphyindex/style.scss */
+  .card .card-description {
+    display: none;
+    max-width: 350px;
+    height: 100%;
+    padding: 15px 12px;
+    transition: 0.5s;
+    background-color: black;
+    color: white; }
+    /* line 92, /Users/Jake/WebDev/giphyindex/style.scss */
+    .card .card-description a {
+      color: white;
+      text-decoration: none; }
+      /* line 95, /Users/Jake/WebDev/giphyindex/style.scss */
+      .card .card-description a p {
+        color: #FF6464; }
+  /* line 102, /Users/Jake/WebDev/giphyindex/style.scss */
+  .card:hover .card-img {
+    display: none; }
+  /* line 105, /Users/Jake/WebDev/giphyindex/style.scss */
+  .card:hover .card-description {
+    display: block; }
+
+/*# sourceMappingURL=style.css.map */
