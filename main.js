@@ -32,29 +32,35 @@ var reddit = new Snoocore({
 //Save data to firebase
 
 var rootRef = new Firebase("https://giphyindex.firebaseio.com/");
-var articleRef = rootRef.child("articles");
-
-var newRefs=[];
+var articleRef = rootRef.child("world_articles");
+var newRefs=new Array();
 
 //Initialize GIF variables
 
-var gifUrls = [];
-var gifMeanings = [];
+var gifUrls = new Array();
+var gifMeanings = new Array();
 var bestGifIndex = 0;
-var gifSentiments= [];
+var gifSentiments= new Array();
 var bothdone = [0, 0, 0, 0];
-var gifForArticle = [];
+var gifForArticle = new Array();
 
 //Array that contains the indices of each gif that maps to each article.
 // where index = article number, value = gif_index
 
-var gifArticleMapping = [];
+var gifArticleMapping = new Array();
 
 //Put cat gifs in an array
 reddit('/r/catgifs/hot').listing().then(function(slice){
 	slice.children.forEach(function(child){
-		gifUrls.push(child.data.url);
 
+		var pat = "gifv";
+		var pat1 = "gif";
+		var currUrl = child.data.url;
+		var ind = currUrl.indexOf(pat);
+		if(ind != -1){
+			currUrl = currUrl.replace("gifv", "gif");
+		}
+		gifUrls.push(currUrl);
 		//Get text tags for each child
 		indico.texttags(child.data.title).then(function(res){
 		var currArray = setFeatures(res);
@@ -73,15 +79,16 @@ reddit('/r/catgifs/hot').listing().then(function(slice){
 
 	if(bothdone[0]==1 && bothdone[1]==1 &&bothdone[2]==1){
 		//console.log(newsSentiments);
-		for(var sent in newsSentiments){
-			gifArticleMapping.push(14);	
+		for(var sent = 0; sent<12; sent++){
+			gifArticleMapping.push(findBestestIndex(sent, gifSentiments));	
 			var newArticleRef = articleRef.push();
 			newArticleRef.set({
 			article_url: newsLinks[sent],	
 			gif_url: gifUrls[gifArticleMapping[sent]],
-			sentiment: newsSentiments[sent]
-				});	
-			console.log("Sent!");
+			sentiment: newsSentiments[sent],
+			article_title: newsTitles[sent]
+				});
+			console.log(gifArticleMapping);
 	}
 		//console.log(gifArticleMapping);
 
@@ -109,8 +116,8 @@ var newsSentiments = [];
 var newsIndex = 0;
 var newsIndices = [];
 
-var subredd = '/r/news/hot';
-
+var subredd = '/r/worldnews/hot';
+var newsTitles = [];
 
 //Get news data from reddit
 reddit(subredd).listing().then(function(slice) {
@@ -123,6 +130,7 @@ reddit(subredd).listing().then(function(slice) {
   	}
   	//Add the topics of title to topic array
   	var currTitle = child.data.title;
+  	newsTitles.push(currTitle);
   	indico.texttags(currTitle, settings)
   .then(function(res) {
   	var currArray = setFeatures(res); 	
@@ -136,17 +144,16 @@ reddit(subredd).listing().then(function(slice) {
   			bothdone[1] = 1;
   		}
   		if(bothdone[1]==1 && bothdone[0] ==1 && bothdone[2] == 1) {
-		for(var sent in newsSentiments){
-				gifArticleMapping.push(14);
-				var newArticleRef = articleRef.push();
-				var jurl = newsLinks[sent];
-				var jgif = gifUrls[[sent]];
-				newArticleRef.set({			
-					article_url: newsLinks[sent],
-					gif_url: gifUrls[gifArticleMapping[sent]] ,
-					sentiment: newsSentiments[sent]
-					});
-		console.log(gifArticleMapping);
+		for(var sent = 0; sent<12; sent++){
+				gifArticleMapping.push(findBestestIndex(sent, gifSentiments));	
+			var newArticleRef = articleRef.push();
+			newArticleRef.set({
+			article_url: newsLinks[sent],	
+			gif_url: gifUrls[gifArticleMapping[sent]],
+			sentiment: newsSentiments[sent],
+			article_title: newsTitles[sent]
+				});	
+			console.log(gifArticleMapping);
   		}
   	}
 
@@ -189,9 +196,9 @@ function findBestestIndex(articleIndex, gifs){
 	//console.log(newsTopics[0]);
 	var bestIndex = 0;
 	var bestDiff = 1000;
-	var sentimentDiffs = [];
-	var topicDiffs = [];
-	var weightedDiffs = [];
+	var sentimentDiffs = new Array();
+	var topicDiffs = new Array();
+	var weightedDiffs = new Array();
 	for(var idx = 0; idx< 25; idx++){
 		sentimentDiffs.push(Math.abs(newsSentiments[articleIndex]- gifs[idx]));
 		//console.log("news : " + newsSentiments[articleIndex]);
@@ -207,34 +214,39 @@ function findBestestIndex(articleIndex, gifs){
 			result += Math.pow((nt - gt), 2);
 		}
 		topicDiffs.push(result);
-		console.log("result : " + result);
+		//console.log("result : " + result);
 	}
 	console.log("\n");
 	for(var i in sentimentDiffs){
 		//console.log(sentimentDiffs);
-		weightedDiffs[i] = topicDiffs[i] + .25*sentimentDiffs[i];
+		weightedDiffs[i] = 1.5*topicDiffs[i] + .5*sentimentDiffs[i];
 		//console.log(topicDiffs.length);
-		console.log("weighted differences " + 0.2*weightedDiffs[i]);
-//
+		//console.log("weighted differences " + 0.2*weightedDiffs[i]);
 	}
 
 	bestIndex = 0;
 	bestDiff = 1000;
 	for(var j=0; j<24; j++){
+		var jinMap = false;
+		for(var member in gifArticleMapping){
+			if (j == gifArticleMapping[member]){
+				jinMap = true;
+			}
+		}
 		var currDiff = weightedDiffs[j];
-		if(currDiff>bestDiff){
+		if(currDiff<bestDiff && !jinMap){
 			bestIndex = j;
 			bestDiff = currDiff;
 		}
 		//console.log("best index: " + bestIndex);
 	}
 	return bestIndex;
-	console.log(bestIndex);
+	//console.log(bestIndex);
 }
 
 //Create the feature set as a vector
  function setFeatures(res) {
-  	var features = [];
+  	var features = new Array();
 		for(var key in res){
 			if(res.hasOwnProperty(key)){
 				//console.log(res[key]);

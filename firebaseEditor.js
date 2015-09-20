@@ -1,10 +1,8 @@
 var Firebase = require("firebase");
 
 var rootRef = new Firebase("https://giphyindex.firebaseio.com/");
+var scienceRef = rootRef.child("world_articles");
+scienceRef.remove();
 
-rootRef.push().set({
-	article_url: "nytimes.com",
-	gif_url: "imgur.com",
-	sentiment: .8
-
-})
+var test = new Array();
+console.log(test.length);
