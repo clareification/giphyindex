@@ -5,13 +5,6 @@ var q = require('q');
 
 settings = {"api_key": "68cd5c1dafb61295a5f288b517bd083b"};
 
-indico.sentiment("This is a decent example")
-  .then(function(res) {
-    //console.log(res);
-  }).catch(function(err) {
-    console.warn(err);
-  });
-
 // {u'Sentiment': 0.6072520629364269}
 
 
@@ -36,7 +29,12 @@ var reddit = new Snoocore({
   }
 });
 
+//Save data to firebase
 
+var rootRef = new Firebase("https://giphyindex.firebaseio.com/");
+var articleRef = rootRef.child("articles");
+
+var newRefs=[];
 
 //Initialize GIF variables
 
@@ -44,25 +42,54 @@ var gifUrls = [];
 var gifMeanings = [];
 var bestGifIndex = 0;
 var gifSentiments= [];
+var bothdone = [0, 0, 0, 0];
+var gifForArticle = [];
+
+//Array that contains the indices of each gif that maps to each article.
+// where index = article number, value = gif_index
+
+var gifArticleMapping = [];
 
 //Put cat gifs in an array
 reddit('/r/catgifs/hot').listing().then(function(slice){
 	slice.children.forEach(function(child){
 		gifUrls.push(child.data.url);
-		displayVariables();
 
 		//Get text tags for each child
 		indico.texttags(child.data.title).then(function(res){
-		gifMeanings.push(setFeatures(res));
+		var currArray = setFeatures(res);
+		gifMeanings.push(currArray);
+		if(gifMeanings.length == 25){
+			bothdone[3] = 1;
+		}
 		});
 
 
-		indico.sentiment(child.data.title)
-  .then(function(res) {
+		indico.sentiment(child.data.title).then(function(res) {
     gifSentiments.push(res);
+    if(gifSentiments.length>=25){
+			bothdone[0] = 1;
+		}
+
+	if(bothdone[0]==1 && bothdone[1]==1 &&bothdone[2]==1){
+		//console.log(newsSentiments);
+		for(var sent in newsSentiments){
+			gifArticleMapping.push(14);	
+			var newArticleRef = articleRef.push();
+			newArticleRef.set({
+			article_url: newsLinks[sent],	
+			gif_url: gifUrls[gifArticleMapping[sent]],
+			sentiment: newsSentiments[sent]
+				});	
+			console.log("Sent!");
+	}
+		//console.log(gifArticleMapping);
+
+	}
    // console.log(res);
-  })
-		});
+  });
+});
+});
 	
 
 
@@ -70,6 +97,7 @@ reddit('/r/catgifs/hot').listing().then(function(slice){
 
 //Array of URLs
 var newsLinks = [];
+
 
 //Array of topics (each topic is a 111-dimensional vector)
 var newsTopics = [];
@@ -79,45 +107,134 @@ var newsSentiments = [];
 
 //index of current news article
 var newsIndex = 0;
+var newsIndices = [];
+
+var subredd = '/r/news/hot';
+
 
 //Get news data from reddit
-reddit('/r/news/hot').listing().then(function(slice) {
+reddit(subredd).listing().then(function(slice) {
   slice.children.forEach(function(child){
 
   	//Add url to links array
   	newsLinks.push(child.data.url);
-
+  	if(newsLinks.length >= 25){
+  		bothdone[2] = 1;
+  	}
   	//Add the topics of title to topic array
   	var currTitle = child.data.title;
   	indico.texttags(currTitle, settings)
   .then(function(res) {
   	var currArray = setFeatures(res); 	
     newsTopics.push(currArray);
+    //console.log(newsTopics);
   });
+
   	indico.sentiment(currTitle).then(function(res){
   		newsSentiments.push(res);
-  	});
+  		if(newsSentiments.length>=25){
+  			bothdone[1] = 1;
+  		}
+  		if(bothdone[1]==1 && bothdone[0] ==1 && bothdone[2] == 1) {
+		for(var sent in newsSentiments){
+				gifArticleMapping.push(14);
+				var newArticleRef = articleRef.push();
+				var jurl = newsLinks[sent];
+				var jgif = gifUrls[[sent]];
+				newArticleRef.set({			
+					article_url: newsLinks[sent],
+					gif_url: gifUrls[gifArticleMapping[sent]] ,
+					sentiment: newsSentiments[sent]
+					});
+		console.log(gifArticleMapping);
+  		}
+  	}
+
+  	  });
   });
 });
 
 
-console.log("difference : " + (newsSentiments[1] - gifSentiments[1]));
-
 //More Functions
 
-function sumSquares(a , b){
-	var sum = 0;;
+function sumSquares(){
+
+	var sum = 0;
 	for(var i = 0; i<a.length && i<b.length; i++){
 		sum += Math.pow(a[i] - b[i], 2);
 	}
-
 	//for debugging
-	console.log("Sum is " + sum);
 	return sum;
 }
 
+
+
+
+function findBestIndex(article, gifs){
+	var bestIndex = 0;
+
+	//All sentiments between 0 and 1 so (x-y) < 1
+	var bestDifference = 1;
+	for(var idx in gifSentiments){
+		if(Math.abs(article - gifs[idx]) < bestDifference){
+			bestDifference = Math.abs(article - gifs[idx]);		
+			bestIndex = idx;
+		}
+	}
+	//console.log("Best index : " + bestIndex + "values : " + article + " and " + gifs[bestIndex]);
+	return bestIndex;
+}
+
+function findBestestIndex(articleIndex, gifs){
+	//console.log(newsTopics[0]);
+	var bestIndex = 0;
+	var bestDiff = 1000;
+	var sentimentDiffs = [];
+	var topicDiffs = [];
+	var weightedDiffs = [];
+	for(var idx = 0; idx< 25; idx++){
+		sentimentDiffs.push(Math.abs(newsSentiments[articleIndex]- gifs[idx]));
+		//console.log("news : " + newsSentiments[articleIndex]);
+		//console.log("Gifs: " + gifs[idx]);
+		//console.log(Math.abs(newsSentiments[articleIndex]- gifs[idx]));
+	}
+
+	for(var indx=0; indx<25; indx++){
+		var result = 0;
+		for(var key in newsTopics){
+			var nt = newsTopics[articleIndex][key];
+			var gt = gifMeanings[indx][key];
+			result += Math.pow((nt - gt), 2);
+		}
+		topicDiffs.push(result);
+		console.log("result : " + result);
+	}
+	console.log("\n");
+	for(var i in sentimentDiffs){
+		//console.log(sentimentDiffs);
+		weightedDiffs[i] = topicDiffs[i] + .25*sentimentDiffs[i];
+		//console.log(topicDiffs.length);
+		console.log("weighted differences " + 0.2*weightedDiffs[i]);
+//
+	}
+
+	bestIndex = 0;
+	bestDiff = 1000;
+	for(var j=0; j<24; j++){
+		var currDiff = weightedDiffs[j];
+		if(currDiff>bestDiff){
+			bestIndex = j;
+			bestDiff = currDiff;
+		}
+		//console.log("best index: " + bestIndex);
+	}
+	return bestIndex;
+	console.log(bestIndex);
+}
+
+//Create the feature set as a vector
  function setFeatures(res) {
-  	var features = []
+  	var features = [];
 		for(var key in res){
 			if(res.hasOwnProperty(key)){
 				//console.log(res[key]);
@@ -126,19 +243,4 @@ function sumSquares(a , b){
 			}
 			//console.log(features);
 	return features;
-  }
-
-
-function displayVariables(){
-	console.log("gm : " + gifMeanings.length + " gs " + gifSentiments.length + " ns" + newsSentiments.length + "nt" + newsTopics.length);
-}
-
-//Save to firebase
-
-var ref = new Firebase("https://giphyindex.firebaseio.com/");
-
-var contentRef = ref.child("content");
-
-contentRef.set({
-	gif_url: ""
-})
+ }
